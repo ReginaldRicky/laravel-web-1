@@ -60,17 +60,19 @@
                                                     clip-rule="evenodd"></path>
                                             </svg>
                                         </button>
-                                        @if(request('search'))
-                                        <a href="{{ request()->fullUrlWithQuery(['search'=> null]) }}" class="btn btn-outline-secondary ml-3" id="clear-search"> Clear</a>
+                                        @if (request('search'))
+                                            <a href="{{ request()->fullUrlWithQuery(['search' => null]) }}"
+                                                class="btn btn-outline-secondary ml-3" id="clear-search"> Clear</a>
                                         @endif
                                     </div>
                                 </div>
                             </div>
                         </form>
+
                         <table id="table-pelanggan" class="table table-centered table-nowrap mb-0 rounded">
                             <thead class="thead-light">
                                 <tr>
-                                    <th class="border-0">No</th>
+                                    <th>No</th>
                                     <th class="border-0">First Name</th>
                                     <th class="border-0">Last Name</th>
                                     <th class="border-0">Birthday</th>
@@ -81,10 +83,9 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($dataPelanggan as $item)
+                                @foreach ($dataPelanggan as $index => $item)
                                     <tr>
-                                        <td>{{ ($dataPelanggan->currentPage() - 1) * $dataPelanggan->perPage() + $loop->iteration }}
-                                        </td>
+                                        <td>{{ $dataPelanggan->firstItem() + $index }}</td>
                                         <td>{{ $item->first_name }}</td>
                                         <td>{{ $item->last_name }}</td>
                                         <td>{{ $item->birthday }}</td>

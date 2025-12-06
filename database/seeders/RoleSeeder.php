@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
 use App\Models\User;
@@ -11,30 +12,32 @@ class RoleSeeder extends Seeder
 {
     public function run(): void
     {
-        app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
+        //Reset cached roles and permissions
+        app()[\Spatie\Permission\PermissionRegistrar::class]
+        ->forgetCachedPermissions();
 
-        $roleAdmin = Role::firstOrCreate(['name' => 'admin']);
-        $roleUser  = Role::firstOrCreate(['name' => 'user']);
+        //role dengan huruf kecil
+        $roleAdmin = Role::create(['name' => 'admin']);
+        $roleUser = Role::create(['name' => 'user']);
 
+        //Buat Akun ADMIN
         $admin = User::firstOrCreate(
-            ['email' => 'admin@gmail.com'],
+            ['email' => 'admin@gmail.com'],//Cek email biar gak duplicate
             [
-                'name'     => 'Administrator',
-                'password' => Hash::make('password'),
+                'name' => 'Admin',
+                'password' => Hash::make('admin'), //Passwordnya: admin
             ]
         );
+        $admin->assignRole($roleAdmin);//<-- Kasih Jabatan Admin
 
-
-        $admin->assignRole($roleAdmin);
-
+        //Buat Akun USER
         $user = User::firstOrCreate(
-            ['email' => 'user@gmail.com'],
+            ['email' => 'Roberto@gmail.com'],
             [
-                'name'     => 'User Biasa',
-                'password' => Hash::make('password'),
+                'name' => 'Roberto User',
+                'password' => Hash::make('roberto'),
             ]
         );
-
-        $user->assignRole($roleUser);
-    }
+            $user->assignRole($roleUser);//<-- Kasih Jabatan User
+        }
 }

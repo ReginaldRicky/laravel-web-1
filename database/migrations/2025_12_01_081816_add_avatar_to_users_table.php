@@ -12,17 +12,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('avatar')->nullable()->after('password'); // Kolom baru
+            $table->string('avatar')->nullable()->after('password');
         });
     }
 
-    /**
-     * Hapus kolom avatar dari tabel users.
-     */
     public function down(): void
     {
         Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('avatar');
         });
     }
+
 };

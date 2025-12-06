@@ -2,16 +2,13 @@
 
 namespace Database\Seeders;
 
-use Faker\Factory;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Faker\Factory;
+use Illuminate\Support\Facades\DB;
 
 class CreatePelangganDummy extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(){
     $faker = \Faker\Factory::create();
 

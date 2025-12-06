@@ -17,6 +17,7 @@ class UserController extends Controller
     public function index()
     {
         $data['dataUser'] = User::all();
+        // Pastikan view-nya benar (sesuai folder)
         return view('admin.user.index', $data);
     }
 
@@ -139,6 +140,7 @@ class UserController extends Controller
         }
 
         $user->delete();
+
         return redirect()->route('user.index')->with('success', 'Data berhasil dihapus');
     }
 }
